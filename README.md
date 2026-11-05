@@ -1,4 +1,4 @@
-# Ex.No:2a Develop program to create a text field and a button “Navigate”. When you enter “www.gmail.com” and press navigate button it should open google page using Implicit Intents.
+# Ex.No:3a Develop program to create a text field and a button “Navigate”. When you enter “www.gmail.com” and press navigate button it should open google page using Implicit Intents.
 
 
 ## AIM:
@@ -10,26 +10,28 @@ To create a navigate button using Implicit Intent to display the gmail page usin
 Latest Version Android Studio
 
 ## ALGORITHM:
-
-
+1.Launch the Android application.
+2.Create an Implicit Intent object.
+3.Specify the required action (ACTION_VIEW, ACTION_DIAL, ACTION_SEND, etc.).
+4.Attach the required data using Uri.parse().
+5.Invoke startActivity() with the Intent.
+6.Android searches for a compatible application.
+7.Display the app chooser if multiple apps are available.
+8.Launch the selected application.
+9.Perform the requested action.
 
 ## PROGRAM:
 ```
 /*
 Program to print the text “Implicitintent”.
 Developed by: BLESSING JEFFREY YL
-Registeration Number : 212223220014
+Registeration Number: 212223220014
 */
 ```
-
-
-Main activity.java
-
+## MainActivity.java
 ```
+package com.example.implicitintent;
 
-package com.example.exp_02;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -37,76 +39,86 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity {
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-    EditText editTextURL;
-    Button btnOpen;
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EditText editText;
+        Button button;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        button = findViewById(R.id.button);
+        editText = (EditText) findViewById(R.id.editTextText);
 
-        editTextURL = findViewById(R.id.editTextURL);
-        btnOpen = findViewById(R.id.btnOpen);
-
-        btnOpen.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                String url = editTextURL.getText().toString().trim();
-
-                // If URL doesn’t start with http/https, add it
-                if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                    url = "http://" + url;
-                }
-
-                // Implicit Intent to open URL
+            public void onClick(View view) {
+                String url=editText.getText().toString();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
     }
 }
-
-
 ```
-Android manifest.xml
+## activity_main.xml
 ```
-
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <application
-        android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.EXP02">
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="148dp"
+        android:layout_height="42dp"
+        android:text="Enter Website"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/editTextText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-    </application>
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="284dp"
+        android:ems="10"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</manifest>
-
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="144dp"
+        android:text="Navigate"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 ```
-
-
 ## OUTPUT
-<img width="1920" height="1200" alt="Screenshot (69)" src="https://github.com/user-attachments/assets/3f964b2a-cb3a-4913-93b4-7d1f1aabec28" />
 
-
-
+<img width="1430" height="752" alt="image" src="https://github.com/user-attachments/assets/7412cb97-5b0d-4dbc-9f3b-074ff51a670c" />
+<img width="1427" height="766" alt="image" src="https://github.com/user-attachments/assets/6f121858-7ccf-4703-a183-a55bbafd4e02" />
+<img width="1441" height="735" alt="image" src="https://github.com/user-attachments/assets/edd3d5e6-8b5c-4584-97b4-e4a3dbe9ec7d" />
 
 
 ## RESULT
